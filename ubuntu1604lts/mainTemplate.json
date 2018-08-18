@@ -207,7 +207,7 @@
               "typeHandlerVersion": "2.0",
               "autoUpgradeMinorVersion": true,
               "settings": {
-                "timestamp":"123456789"         
+                "timestamp":123456789
               },
               "protectedSettings": {
                  "commandToExecute": "[concat('/bin/bash setupagent.sh', ' \"', parameters('vstsAccountUrl'), '\" \"', parameters('personalAccessToken'), '\" \"', parameters('agentPoolName'), '\"')]",
