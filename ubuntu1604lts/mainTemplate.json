@@ -2,22 +2,27 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "baseUrl":{
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/marcvaneijk/vsts-buildagent/master/ubuntu1604lts"
+        },
         "location": {
-            "type": "String",
+            "type": "string",
             "defaultValue": "[resourceGroup().location]"
         },
         "adminUsername": {
-            "type": "String"
+            "type": "string",
+            "defaultValue": "buildagent"
         },
         "sshPublicKey": {
-            "type": "SecureString"
+            "type": "securestring"
         },
         "vstsAccountUrl": {
             "type": "string",
             "defaultValue": "https://<your-organization>.visualstudio.com"
         },
         "personalAccessToken" : {
-            "type": "SecureString"
+            "type": "securestring"
         },
         "agentPoolName" : {
             "type": "string"
@@ -205,8 +210,8 @@
                 "timestamp":"123456789"         
               },
               "protectedSettings": {
-                 "commandToExecute": "sh SetupAgent.sh parameter('vstsAccountUrl') parameter('personalAccessToken') parameter('agentPoolName')",
-                 "fileUris": ["https://github.com/marcvaneijk/Archive/SetupAgent.sh"]  
+                 "commandToExecute": "[concat('/bin/bash setupagent.sh', ' \"', parameters('vstsAccountUrl'), '\" \"', parameters('personalAccessToken'), '\" \"', parameters('agentPoolName'), '\"')]",
+                 "fileUris": ["[concat(parameters('baseUrl'),'/scripts/setupagent.sh')]"]  
               }
             }
           }
