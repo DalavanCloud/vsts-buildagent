@@ -194,7 +194,7 @@
             }
         },
         {
-            "name": "[variables('names').vmConfig]",
+            "name": "[concat(variables('names').vm,'/config')]",
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "location": "[parameters('location')]",
             "apiVersion": "2015-06-15",
