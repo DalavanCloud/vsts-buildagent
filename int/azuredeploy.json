@@ -23,9 +23,6 @@
             "name": "PreparingAlwaysOnSqlServer",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2016-09-01",
-            "dependsOn": [
-                "Microsoft.Resources/deployments/ProvisioningSQLVMs"
-            ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
