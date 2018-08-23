@@ -47,7 +47,7 @@
               "typeHandlerVersion": "2.0",
               "autoUpgradeMinorVersion": true,
               "settings": {
-                "timestamp":123456789
+                "timestamp":"[parameters('numberOfDisks')]"
               },
               "protectedSettings": {
                  "commandToExecute": "[concat('/bin/bash setupagent.sh', ' \"')]",
