@@ -32,13 +32,26 @@ echo "### VSTS Agent ###"
 
 echo "--- Download and extract the VSTS agent --"
 #sudo 
-mkdir /agent && cd /agent
-curl -L https://vstsagentpackage.azureedge.net/agent/2.136.1/vsts-agent-linux-x64-2.136.1.tar.gz | sudo tar zx
+#create a new group
+groupadd agents
+#add the user to the group
+usermod -aG agents buildagent
+#verify what users are part of the group
+grep agents /etc/group
+#create a directory
+mkdir /agent
+#set ownership of the folder to the group
+chgrp agents /agent
+# set read/write permissions for the new group
+chmod -R 0760 /agent
+
+sudo -u buildagent curl -L https://vstsagentpackage.azureedge.net/agent/2.136.1/vsts-agent-linux-x64-2.136.1.tar.gz | tar zx -C /agent
 
 echo "--- Install .Net core 2.0 dependencies from agent folder ---"
 #sudo 
 ./bin/installdependencies.sh
 
+cd /agent
 echo "--- Configure the VSTS agent ---"
 ./config.sh \
     --unattended \

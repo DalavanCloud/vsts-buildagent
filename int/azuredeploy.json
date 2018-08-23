@@ -1,0 +1,44 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "baseUrl":{
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/marcvaneijk/vsts-buildagent/master/int"
+        },
+        "numberOfSqlVMDisks": {
+            "type": "int",
+            "metadata": {
+                "description": "Number of data disks (subject to VM size limitations)"
+            },
+            "minValue": 1,
+            "maxValue": 32,
+            "defaultValue": 2
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "name": "PreparingAlwaysOnSqlServer",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2016-09-01",
+            "dependsOn": [
+                "Microsoft.Resources/deployments/ProvisioningSQLVMs"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('baseUrl'),'/nested/int.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "numberOfDisks": {
+                        "value": "[parameters('numberOfSqlVMDisks')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {}
+}
