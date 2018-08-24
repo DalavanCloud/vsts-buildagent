@@ -1,0 +1,41 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+      "parameters": {},
+      "variables": {
+          "storageAccountName": "[uniquestring(resourceGroup().id)]"
+      },
+      "resources": [
+        {
+            "name": "[variables('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2015-06-15",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "accountType": "Standard_LRS"
+            }
+        }    
+      ],
+    "outputs": {
+        "endpoint":{
+            "value": "[reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob]",
+            "type": "string"
+        },
+        "AzureCloud":{
+            "value": "[endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.windows.net/')]",
+            "type": "bool"
+        },
+        "AzureChinaCloud":{
+            "value": "[endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.chinacloudapi.cn/')]",
+            "type": "bool"
+        },
+        "AzureGermanCloud":{
+            "value": "[endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.cloudapi.de/')]",
+            "type": "bool"
+        },
+        "AzureUSGovernment":{
+            "value": "[endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.usgovcloudapi.net/')]",
+            "type": "bool"
+        }
+    }
+  }

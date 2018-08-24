@@ -1,0 +1,44 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+      "parameters": {
+        "baseUrl":{
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/marcvaneijk/vsts-buildagent/master/context"
+        }
+      },
+      "variables": {
+      },
+      "resources": [
+        {
+			"name": "getContext",
+			"type": "Microsoft.Resources/deployments",
+            "apiVersion": "2015-01-01",
+            "properties": {
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('baseUrl'),'/nested/context.json')]",
+					"contentVersion": "1.0.0.0"
+				}
+            }
+        }   
+      ],
+    "outputs": {
+        "AzureCloud":{
+            "value": "[reference('getContext').outputs.AzureCloud.value]",
+            "type": "bool"
+        },
+        "AzureChinaCloud":{
+            "value": "[reference('getContext').outputs.AzureChinaCloud.value]",
+            "type": "bool"
+        },
+        "AzureGermanCloud":{
+            "value": "[reference('getContext').outputs.AzureGermanCloud.value]",
+            "type": "bool"
+        },
+        "AzureUSGovernment":{
+            "value": "[reference('getContext').outputs.AzureUSGovernment.value]",
+            "type": "bool"
+        }
+    }
+  }
