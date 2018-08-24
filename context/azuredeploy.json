@@ -24,25 +24,9 @@
         }   
       ],
     "outputs": {
-        "AzureCloud":{
-            "value": "[reference('getContext').outputs.AzureCloud.value]",
+        "cloud":{
+            "value":"[if(equals(reference('getContext').outputs.clouds.value,''),'AzureStack',reference('getContext').outputs.clouds.value)]",
             "type": "string"
-        },
-        "AzureChinaCloud":{
-            "value": "[reference('getContext').outputs.AzureChinaCloud.value]",
-            "type": "string"
-        },
-        "AzureGermanCloud":{
-            "value": "[reference('getContext').outputs.AzureGermanCloud.value]",
-            "type": "string"
-        },
-        "AzureUSGovernment":{
-            "value": "[reference('getContext').outputs.AzureUSGovernment.value]",
-            "type": "string"
-        },
-        "AzureStack":{
-            "value":"[createArray(reference('getContext').outputs.AzureCloud.value, reference('getContext').outputs.AzureChinaCloud.value, reference('getContext').outputs.AzureGermanCloud.value, reference('getContext').outputs.AzureUSGovernment.value)]",
-            "type": "array"
         }
     }
   }
