@@ -22,7 +22,7 @@
             "type": "string"
         },
         "AzureCloud":{
-            "value": "[if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.windows.net2/'),'AzureCloud','')]",
+            "value": "[if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.windows.net/'),'AzureCloud','')]",
             "type": "string"
         },
         "AzureChinaCloud":{
