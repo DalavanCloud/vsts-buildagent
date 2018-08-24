@@ -26,19 +26,23 @@
     "outputs": {
         "AzureCloud":{
             "value": "[reference('getContext').outputs.AzureCloud.value]",
-            "type": "bool"
+            "type": "string"
         },
         "AzureChinaCloud":{
             "value": "[reference('getContext').outputs.AzureChinaCloud.value]",
-            "type": "bool"
+            "type": "string"
         },
         "AzureGermanCloud":{
             "value": "[reference('getContext').outputs.AzureGermanCloud.value]",
-            "type": "bool"
+            "type": "string"
         },
         "AzureUSGovernment":{
             "value": "[reference('getContext').outputs.AzureUSGovernment.value]",
-            "type": "bool"
+            "type": "string"
+        },
+        "AzureStack":{
+            "value":"[createArray(reference('getContext').outputs.AzureCloud.value, reference('getContext').outputs.AzureChinaCloud.value, reference('getContext').outputs.AzureGermanCloud.value, reference('getContext').outputs.AzureUSGovernment.value)]",
+            "type": "array"
         }
     }
   }
