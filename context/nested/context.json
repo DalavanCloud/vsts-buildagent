@@ -37,9 +37,18 @@
             "value": "[if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.usgovcloudapi.net/'),'AzureUSGovernment','')]",
             "type": "string"
         },
-        "cloud":{
+        "cloudTemp":{
             "value": "[concat(if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.windows.net/'),'AzureCloud',''),if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.chinacloudapi.cn/'),'AzureChinaCloud',''),if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.cloudapi.de/'),'AzureGermanCloud',''),if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.usgovcloudapi.net/'),'AzureUSGovernment',''))]",
             "type": "string"
+        },
+        "cloudSimple":{
+            "value": "[if(equals('cloudTemp',''),'AzureStack','cloudTemp')]",
+            "type":"string"
+        },
+        "cloud":{
+            "value": "[if(equals(concat(if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.windows.net/'),'AzureCloud',''),if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.chinacloudapi.cn/'),'AzureChinaCloud',''),if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.cloudapi.de/'),'AzureGermanCloud',''),if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.usgovcloudapi.net/'),'AzureUSGovernment','')),''),'AzureStack',concat(if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.windows.net/'),'AzureCloud',''),if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.chinacloudapi.cn/'),'AzureChinaCloud',''),if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.cloudapi.de/'),'AzureGermanCloud',''),if(endsWith(reference(variables('storageAccountName'),'2015-06-15').primaryEndpoints.blob, 'core.usgovcloudapi.net/'),'AzureUSGovernment','')))]",
+            "type": "string"
         }
+
     }
   }

@@ -8,6 +8,7 @@
         }
       },
       "variables": {
+          "var1": "[concat('','','')]"
       },
       "resources": [
         {
@@ -25,7 +26,7 @@
       ],
     "outputs": {
         "cloud":{
-            "value":"[if(equals(reference('getContext').outputs.cloud.value,''),'AzureStack',reference('getContext').outputs.cloud.value)]",
+            "value":"[reference('getContext').outputs.cloud.value]",
             "type": "string"
         }
     }
